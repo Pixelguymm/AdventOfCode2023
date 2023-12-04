@@ -1,4 +1,5 @@
 import java.io.IOException
+import kotlin.math.pow
 
 fun resource(name: String) = {}.javaClass.getResource(name)?.readText()?.trim()
     ?: throw IOException("No resource named \"$name\"")
@@ -18,3 +19,7 @@ fun <T> List<List<T>>.indexed() = this.mapIndexed { i1, l ->
         Pair(i1, i2) to t
     }
 }
+
+fun Int.pow(n: Int) = this.toDouble().pow(n)
+
+fun <T> List<T>.sumOfIndexed(transform: (Int, T) -> Int) = this.mapIndexed(transform).sum()
