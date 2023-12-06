@@ -23,5 +23,6 @@ fun <T> List<List<T>>.indexed() = this.mapIndexed { i1, l ->
 }
 
 fun Int.pow(n: Int) = this.toDouble().pow(n)
+fun Long.pow(n: Int) = this.toDouble().pow(n)
 
 fun <T> List<T>.sumOfIndexed(transform: (Int, T) -> Int) = this.mapIndexed(transform).sum()
