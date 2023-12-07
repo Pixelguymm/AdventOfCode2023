@@ -1,15 +1,13 @@
+import utils.*
 import kotlin.math.max
 import kotlin.math.min
 
 fun main() {
     val input = resource("Day3.txt").lines().map(String::toList)
-    Day3(input).let {
-        println(it.part1())
-        println(it.part2())
-    }
+    Day3(input).showResults()
 }
 
-class Day3(private val charMatrix: List<List<Char>>) {
+class Day3(private val charMatrix: List<List<Char>>) : Day() {
     private fun List<*>.getRangeInBounds(i: Int) =
         max(0, i - 1)..min(count() - 1, i + 1)
 
@@ -25,7 +23,7 @@ class Day3(private val charMatrix: List<List<Char>>) {
 
     private fun List<List<Char>>.getFullNumber(i1: Int, i2: Int): Int {
         var start = i2
-        while(getOrNull(i1, start-1)?.isDigit() == true) {
+        while (getOrNull(i1, start - 1)?.isDigit() == true) {
             --start
         }
         var numStr = ""
@@ -35,7 +33,7 @@ class Day3(private val charMatrix: List<List<Char>>) {
         return numStr.toIntOrNull() ?: 0
     }
 
-    fun part1(): Int {
+    override fun part1(): Int {
         val nums = mutableListOf<Int>()
 
         for (i1 in 0..<charMatrix.count()) {
@@ -55,7 +53,7 @@ class Day3(private val charMatrix: List<List<Char>>) {
         return nums.sum()
     }
 
-    fun part2(): Int {
+    override fun part2(): Int {
         val nums = mutableListOf<Int>()
 
         charMatrix.indexed().flatten().filter { it.second == '*' }.map { (coordinates, _) ->

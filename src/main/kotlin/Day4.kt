@@ -1,35 +1,32 @@
+import utils.lines
+import utils.pow
+import utils.resource
+import utils.sumOfIndexed
 import kotlin.math.roundToInt
 
 fun main() {
     val lines = resource("Day4.txt").lines()
-    Day4(lines).let {
-        println(it.part1())
-        println(it.part2())
-    }
+    Day4(lines).showResults()
 }
 
-class Day4(lines: List<String>) {
-    private var cards: List<Card>
-
-    init {
-        cards = lines.map { l ->
-            val (winning, scratched) = l.split("|").map { n ->
-                n.trim().split(" ")
-                    .filter { it.isNotEmpty() }
-                    .map { it.toIntOrNull() ?: 0 }
-            }
-
-            Card(winning, scratched)
+class Day4(lines: List<String>) : Day() {
+    private val cards: List<Card> = lines.map { l ->
+        val (winning, scratched) = l.split("|").map { n ->
+            n.trim().split(" ")
+                .filter { it.isNotEmpty() }
+                .map { it.toIntOrNull() ?: 0 }
         }
+
+        Card(winning, scratched)
     }
 
-    fun part1() = cards.sumOf { card ->
+    override fun part1() = cards.sumOf { card ->
         val exp = card.getOverlap() - 1
         if (exp < 0) 0
         else 2.pow(exp).roundToInt()
     }
 
-    fun part2() = cards.sumOfIndexed { i, card ->
+    override fun part2() = cards.sumOfIndexed { i, card ->
         val overlap = card.getOverlap()
 
         for (i2 in 1..overlap) {

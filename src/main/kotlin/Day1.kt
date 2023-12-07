@@ -1,12 +1,13 @@
+import utils.lines
+import utils.plus
+import utils.resource
+
 fun main() {
     val input = resource("Day1.txt").lines()
-    Day1(input).let {
-        println(it.part1())
-        println(it.part2())
-    }
+    Day1(input).showResults()
 }
 
-class Day1(private val lines: List<String>) {
+class Day1(private val lines: List<String>) : Day() {
     private val numbers = mapOf(
         "one" to '1',
         "two" to '2',
@@ -19,13 +20,13 @@ class Day1(private val lines: List<String>) {
         "nine" to '9'
     )
 
-    fun part1() = lines.sumOf { line ->
+    override fun part1() = lines.sumOf { line ->
         line.filter { it.isDigit() }.let {
             it.first() + it.last()
         }.toIntOrNull() ?: 0
     }
 
-    fun part2() = lines.sumOf { line ->
+    override fun part2() = lines.sumOf { line ->
         val matches = Regex("(?=(${numbers.keys.joinToString("|")}|\\d))").findAll(line)
         matches.map {
             val value = it.groupValues[1]

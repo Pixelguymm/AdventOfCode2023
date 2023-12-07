@@ -1,14 +1,14 @@
+import utils.lines
+import utils.pow
+import utils.resource
 import kotlin.math.*
 
 fun main() {
     val lines = resource("Day6.txt").lines()
-    Day6(lines).let {
-        println(it.part1())
-        println(it.part2())
-    }
+    Day6(lines).showResults()
 }
 
-class Day6(lines: List<String>) {
+class Day6(lines: List<String>) : Day() {
     private val records = lines.map {
         it.split(Regex("\\s+")).drop(1).mapNotNull(String::toLongOrNull)
     }.let { it.first() zip it.last() }
@@ -28,7 +28,7 @@ class Day6(lines: List<String>) {
         (ceil(high) - floor(low)).roundToInt() - 1
     }
 
-    fun part1() = records.map { getAmount(it) }.reduce { a, b -> a * b }
+    override fun part1() = records.map { getAmount(it) }.reduce { a, b -> a * b }
 
-    fun part2() = getAmount(singleRecord)
+    override fun part2() = getAmount(singleRecord)
 }

@@ -1,12 +1,12 @@
+import utils.lines
+import utils.resource
+
 fun main() {
     val input = resource("Day2.txt").lines()
-    Day2(input).let {
-        println(it.part1())
-        println(it.part2())
-    }
+    Day2(input).showResults()
 }
 
-class Day2(private val lines: List<String>) {
+class Day2(private val lines: List<String>) : Day() {
     private val bounds = mapOf(
         "red" to 12,
         "green" to 13,
@@ -23,13 +23,13 @@ class Day2(private val lines: List<String>) {
         }
     }
 
-    fun part1() = lines.sumOf { line ->
+    override fun part1() = lines.sumOf { line ->
         val (id, inputs) = parseInputs(line)
 
         if (inputs.none { bounds.any { (color, bound) -> it.getOrDefault(color, 0) > bound } }) id else 0
     }
 
-    fun part2() = lines.sumOf { line ->
+    override fun part2() = lines.sumOf { line ->
         val (_, inputs) = parseInputs(line)
 
         fun List<Map<String, Int>>.maxForKey(key: String) = maxOf { it.getOrDefault(key, 0) }

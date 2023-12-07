@@ -1,12 +1,14 @@
+import utils.get
+import utils.lines
+import utils.resource
+import utils.splitByWhitespace
+
 fun main() {
     val groups = resource("Day5.txt").splitByWhitespace().map { it.lines() }
-    Day5(groups).let {
-        println(it.part1())
-        println(it.part2())
-    }
+    Day5(groups).showResults()
 }
 
-class Day5(groups: List<List<String>>) {
+class Day5(groups: List<List<String>>) : Day() {
     private val seeds = groups[0, 0].split(" ").drop(1).mapNotNull(String::toLongOrNull)
 
     private val maps = groups.drop(1).map { g ->
@@ -27,11 +29,11 @@ class Day5(groups: List<List<String>>) {
         return n
     }
 
-    fun part1() = seeds.minOf { s ->
+    override fun part1() = seeds.minOf { s ->
         processSeed(s)
     }
 
-    fun part2(): Long {
+    override fun part2(): Long {
         val seedRanges = mutableListOf<LongRange>()
         for (i in 0..<(seeds.count() - 1) step 2) {
             val (start, len) = seeds[i..(i + 1)]
