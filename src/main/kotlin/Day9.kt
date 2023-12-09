@@ -9,9 +9,9 @@ fun main() {
 }
 
 class Day9(private val sequences: List<List<Int>>): Day() {
-    private fun List<Int>.nextValue(): Int {
+    private fun List<Int>.nextValue(): Long {
         return if (distinct().count() == 1) {
-            first()
+            first().toLong()
         } else {
             last() + mapIndexedNotNull { i, num ->
                 getOrNull(i + 1)?.minus(num)
@@ -19,9 +19,9 @@ class Day9(private val sequences: List<List<Int>>): Day() {
         }
     }
 
-    private fun List<Int>.previousValue(): Int {
+    private fun List<Int>.previousValue(): Long {
         return if (distinct().count() == 1) {
-            first()
+            first().toLong()
         } else {
             first() - mapIndexedNotNull { i, num ->
                 getOrNull(i + 1)?.minus(num)
