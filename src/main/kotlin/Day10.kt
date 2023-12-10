@@ -1,3 +1,4 @@
+import utils.Matrix
 import utils.get
 import utils.getOrNull
 import utils.lines
@@ -43,7 +44,7 @@ enum class Pipe(val char: Char, val connected: List<Direction> = listOf()) {
 
 data class Cell(val pipe: Pipe, var traversed: Boolean)
 
-class Day10(private val cells: MutableList<MutableList<Cell>>) : Day() {
+class Day10(private val cells: Matrix<Cell>) : Day() {
     private val loop: List<Pair<Int, Int>> by lazy {
         var x = cells.indexOfFirst { row -> row.any { it.pipe == Pipe.Start } }
         var y = cells[x].indexOfFirst { it.pipe == Pipe.Start }

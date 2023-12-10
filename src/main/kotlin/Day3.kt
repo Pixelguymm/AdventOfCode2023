@@ -7,21 +7,21 @@ fun main() {
     Day3(input).showResults()
 }
 
-class Day3(private val charMatrix: List<List<Char>>) : Day() {
+class Day3(private val charMatrix: Matrix<Char>) : Day() {
     private fun List<*>.getRangeInBounds(i: Int) =
         max(0, i - 1)..min(count() - 1, i + 1)
 
-    private fun <T> List<List<T>>.getNeighbours(i1: Int, i2: Int) =
+    private fun <T> Matrix<T>.getNeighbours(i1: Int, i2: Int) =
         this[getRangeInBounds(i1), this[i1].getRangeInBounds(i2)]
 
-    private fun List<List<Char>>.hasNeighbour(i1: Int, i2: Int) =
+    private fun Matrix<Char>.hasNeighbour(i1: Int, i2: Int) =
         getNeighbours(i1, i2)
             .flatten()
             .any {
                 !it.isDigit() && it != '.'
             }
 
-    private fun List<List<Char>>.getFullNumber(i1: Int, i2: Int): Int {
+    private fun Matrix<Char>.getFullNumber(i1: Int, i2: Int): Int {
         var start = i2
         while (getOrNull(i1, start - 1)?.isDigit() == true) {
             --start
