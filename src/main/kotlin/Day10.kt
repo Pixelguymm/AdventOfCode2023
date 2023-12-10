@@ -4,8 +4,8 @@ import utils.lines
 import utils.resource
 
 fun main() {
-    val pipes = resource("Day10.txt").lines().mapTo(mutableListOf()) { l ->
-        l.toList().mapTo(mutableListOf()) {
+    val pipes = resource("Day10.txt").lines().map { l ->
+        l.toList().map {
             Cell(Pipe.fromChar(it), false)
         }
     }
