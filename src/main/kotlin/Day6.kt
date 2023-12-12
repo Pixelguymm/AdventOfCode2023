@@ -1,6 +1,7 @@
 import utils.lines
 import utils.pow
 import utils.resource
+import utils.splitNotEmpty
 import kotlin.math.*
 
 fun main() {
@@ -10,7 +11,7 @@ fun main() {
 
 class Day6(lines: List<String>) : Day() {
     private val records = lines.map {
-        it.split(Regex("\\s+")).drop(1).mapNotNull(String::toLongOrNull)
+        it.splitNotEmpty(" ").drop(1).mapNotNull(String::toLongOrNull)
     }.let { it.first() zip it.last() }
 
     private val singleRecord = lines.mapNotNull {

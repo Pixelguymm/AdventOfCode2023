@@ -2,6 +2,7 @@ import utils.get
 import utils.lines
 import utils.resource
 import utils.splitByWhitespace
+import utils.splitNotEmpty
 
 fun main() {
     val groups = resource("Day5.txt").splitByWhitespace().map { it.lines() }
@@ -9,11 +10,11 @@ fun main() {
 }
 
 class Day5(groups: List<List<String>>) : Day() {
-    private val seeds = groups[0, 0].split(" ").drop(1).mapNotNull(String::toLongOrNull)
+    private val seeds = groups[0, 0].splitNotEmpty(" ").drop(1).mapNotNull(String::toLongOrNull)
 
     private val maps = groups.drop(1).map { g ->
         g.drop(1).map { l ->
-            val (dest, source, length) = l.split(" ").mapNotNull(String::toLongOrNull).also {
+            val (dest, source, length) = l.splitNotEmpty(" ").mapNotNull(String::toLongOrNull).also {
                 // Shouldn't happen, just being safe.
                 if (it.count() < 3) throw Exception("Invalid input")
             }
