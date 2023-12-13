@@ -15,4 +15,6 @@ fun <T> Matrix<T>.indexed() = this.mapIndexed { i1, l ->
     }
 }
 
+fun <T> Matrix<T>.flipped() = List(this.first().size) { i2 -> List(this.size) { i1 -> this[i1, i2]} }
+
 fun <T> List<T>.sumOfIndexed(transform: (Int, T) -> Int) = this.mapIndexed(transform).sum()
