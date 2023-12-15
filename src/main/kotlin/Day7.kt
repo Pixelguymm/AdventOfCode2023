@@ -1,6 +1,5 @@
 import utils.lines
 import utils.resource
-import utils.sumOfIndexed
 
 fun main() {
     val lines = resource("Day7.txt").lines()
@@ -37,7 +36,7 @@ class Day7(lines: List<String>) : Day() {
         getRank(hand) * 10e12 + hand.first.toList().fold(0L) { res, cur ->
             res * 100 + cardMap.getOrDefault(cur, 0)
         }
-    }.sumOfIndexed { i, it -> (i + 1) * it.second }
+    }.withIndex().sumOf { (i, it) -> (i + 1) * it.second }
 
     override fun part1() = hands.getValueSum()
 

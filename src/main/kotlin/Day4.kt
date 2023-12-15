@@ -1,7 +1,6 @@
 import utils.lines
 import utils.pow
 import utils.resource
-import utils.sumOfIndexed
 import kotlin.math.roundToInt
 
 fun main() {
@@ -26,7 +25,7 @@ class Day4(lines: List<String>) : Day() {
         else 2.pow(exp).roundToInt()
     }
 
-    override fun part2() = cards.sumOfIndexed { i, card ->
+    override fun part2() = cards.withIndex().sumOf { (i, card) ->
         val overlap = card.getOverlap()
 
         for (i2 in 1..overlap) {
